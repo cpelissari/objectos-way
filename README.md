@@ -1,0 +1,4 @@
+objectos-way
+============
+
+objectos :: way

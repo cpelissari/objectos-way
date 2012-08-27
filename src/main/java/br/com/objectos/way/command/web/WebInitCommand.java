@@ -16,6 +16,7 @@
 package br.com.objectos.way.command.web;
 
 import br.com.objectos.way.command.AbstractCommand;
+import br.com.objectos.way.model.Project;
 
 import com.google.inject.Inject;
 
@@ -43,7 +44,9 @@ class WebInitCommand extends AbstractCommand<WebInitOptions> {
 
   @Override
   protected void executeWithOptions(WebInitOptions options) {
-    yaml.execute(options);
+    Project project = options.toProject();
+
+    yaml.execute(project);
   }
 
 }

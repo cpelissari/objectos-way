@@ -37,7 +37,7 @@ public class GlobalYamlTest {
     Yaml yaml = newYaml();
     String res = yaml.dump(global);
 
-    assertThat(res, equalTo("user:\n  email: a@objectos.com.br\n  name: User A\n"));
+    assertThat(res, equalTo("user:\n  name: User A\n  email: a@objectos.com.br\n"));
   }
 
   public void global_read() {

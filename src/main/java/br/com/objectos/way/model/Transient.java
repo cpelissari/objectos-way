@@ -15,29 +15,14 @@
  */
 package br.com.objectos.way.model;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class FakeProjects {
-
-  public static final Project ACAO_POSITIVA_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Ação Positiva")
-      // .shortName("acao-positiva")
-      .build();
-
-  public static final Project WAY_TEST_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Way Test")
-      .shortName("way-test")
-      .baseDir("test-output")
-      .build();
-
-  private FakeProjects() {
-  }
-
-  private static FakeProjectBuilder start() {
-    return new FakeProjectBuilder();
-  }
-
-}
+@Target({ ElementType.FIELD })
+@Retention(RetentionPolicy.RUNTIME)
+@interface Transient {}

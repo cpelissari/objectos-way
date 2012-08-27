@@ -15,6 +15,7 @@
  */
 package br.com.objectos.way.command.web;
 
+import static br.com.objectos.way.Fakes.cleanFile;
 import static br.com.objectos.way.Fakes.readLines;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -38,46 +39,24 @@ import com.google.inject.Inject;
  */
 @Test
 @Guice(modules = { WayTestModule.class })
-public class WebInitCommandYamlTest {
+public class WebInitCommandTemplatesWebTest {
 
   @Inject
-  private WebInitCommandYaml command;
+  private WebInitCommandTemplatesWeb command;
 
-  public void with_default_options() throws IOException {
-    WebInitOptions options = new WebInitOptions();
-    Project project = options.toProject();
-
-    File yaml = getYaml();
-    assertThat(yaml.exists(), is(false));
-
-    command.execute(project);
-
-    assertThat(yaml.exists(), is(true));
-
-    String res = readLines(yaml);
-    assertThat(res, equalTo(readLines("/web/way.default.yaml")));
-  }
-
-  public void with_defined_options() throws IOException {
+  public void source_code_should_be_created() throws IOException {
     Project project = FakeProjects.WAY_TEST_PROJECT;
     Dirs dirs = project.getDirs();
-    File yaml = new File(dirs.getBaseDirFile(), "way.yaml");
-    yaml.delete();
 
-    assertThat(yaml.exists(), is(false));
+    File java = cleanFile(dirs.getSourceDirFile(), "ui/WayTestListener.java");
+    assertThat(java.exists(), is(false));
 
     command.execute(project);
 
-    assertThat(yaml.exists(), is(true));
+    assertThat(java.exists(), is(true));
 
-    String res = readLines(yaml);
-    assertThat(res, equalTo(readLines("/web/way.yaml")));
-  }
-
-  private File getYaml() {
-    File yaml = new File("way.yaml");
-    yaml.delete();
-    return yaml;
+    String res = readLines(java);
+    assertThat(res, equalTo(readLines("/web/Listener.java")));
   }
 
 }

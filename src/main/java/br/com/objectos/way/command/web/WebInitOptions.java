@@ -76,6 +76,11 @@ public class WebInitOptions implements Options {
       return shortName;
     }
 
+    @Override
+    public String getBaseDir() {
+      return getDirectory();
+    }
+
   }
 
 }

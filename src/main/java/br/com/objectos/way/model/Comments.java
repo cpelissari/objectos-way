@@ -18,26 +18,26 @@ package br.com.objectos.way.model;
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class FakeProjects {
+public class Comments {
 
-  public static final Project ACAO_POSITIVA_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Ação Positiva")
-      // .shortName("acao-positiva")
-      .build();
+  private String file = "";
 
-  public static final Project WAY_TEST_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Way Test")
-      .shortName("way-test")
-      .baseDir("test-output")
-      .build();
+  private String type = "";
 
-  private FakeProjects() {
+  public String getFile() {
+    return file;
   }
 
-  private static FakeProjectBuilder start() {
-    return new FakeProjectBuilder();
+  public String getType() {
+    return type;
+  }
+
+  public void setFile(String file) {
+    this.file = file;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
 }

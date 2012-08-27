@@ -15,29 +15,32 @@
  */
 package br.com.objectos.way.model;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class FakeProjects {
+@Test
+public class DirsTest {
 
-  public static final Project ACAO_POSITIVA_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Ação Positiva")
-      // .shortName("acao-positiva")
-      .build();
+  private Dirs dirs;
 
-  public static final Project WAY_TEST_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Way Test")
-      .shortName("way-test")
-      .baseDir("test-output")
-      .build();
-
-  private FakeProjects() {
+  @BeforeClass
+  public void setUp() {
+    dirs = Dirs.valueOf(".", "br.com.objectos.waytest");
   }
 
-  private static FakeProjectBuilder start() {
-    return new FakeProjectBuilder();
+  public void base_dir_should_be_duh_base_dir() {
+    assertThat(dirs.getBaseDir(), equalTo("."));
+  }
+
+  public void source_dir_should_be_maven_package_name() {
+    String res = dirs.getSourceDir();
+    assertThat(res, equalTo("./src/main/java/br/com/objectos/waytest"));
   }
 
 }

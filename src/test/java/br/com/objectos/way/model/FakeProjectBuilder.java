@@ -20,19 +20,21 @@ package br.com.objectos.way.model;
  */
 public class FakeProjectBuilder implements Project.Builder {
 
-  private String organization;
+  private String group;
 
   private String name;
 
   private String shortName;
+
+  private String baseDir = ".";
 
   @Override
   public Project build() {
     return new Project(this);
   }
 
-  public FakeProjectBuilder organization(String organization) {
-    this.organization = organization;
+  public FakeProjectBuilder group(String group) {
+    this.group = group;
     return this;
   }
 
@@ -46,9 +48,14 @@ public class FakeProjectBuilder implements Project.Builder {
     return this;
   }
 
+  public FakeProjectBuilder baseDir(String baseDir) {
+    this.baseDir = baseDir;
+    return this;
+  }
+
   @Override
   public String getGroup() {
-    return organization;
+    return group;
   }
 
   @Override
@@ -59,6 +66,11 @@ public class FakeProjectBuilder implements Project.Builder {
   @Override
   public String getShortName() {
     return shortName;
+  }
+
+  @Override
+  public String getBaseDir() {
+    return baseDir;
   }
 
 }

@@ -13,31 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package br.com.objectos.way.model;
+package br.com.objectos.way.command.web;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class FakeProjects {
+public class WebCommandException extends RuntimeException {
 
-  public static final Project ACAO_POSITIVA_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Ação Positiva")
-      // .shortName("acao-positiva")
-      .build();
+  private static final long serialVersionUID = 1L;
 
-  public static final Project WAY_TEST_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Way Test")
-      .shortName("way-test")
-      .baseDir("test-output")
-      .build();
-
-  private FakeProjects() {
-  }
-
-  private static FakeProjectBuilder start() {
-    return new FakeProjectBuilder();
+  public WebCommandException(Throwable cause) {
+    super(cause);
   }
 
 }

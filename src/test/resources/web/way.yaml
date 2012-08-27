@@ -1,0 +1,12 @@
+group: br.com.objectos
+name: Way Test
+shortName: way-test
+comments:
+  file: ''
+  type: ''
+dirs:
+  baseDir: test-output
+  sourceDir: test-output/src/main/java/br/com/objectos/waytest
+types:
+  prefix: WayTest
+  packageName: br.com.objectos.waytest

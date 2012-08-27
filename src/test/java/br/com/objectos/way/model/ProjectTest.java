@@ -15,29 +15,37 @@
  */
 package br.com.objectos.way.model;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+import org.testng.annotations.Test;
+
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class FakeProjects {
+@Test
+public class ProjectTest {
 
-  public static final Project ACAO_POSITIVA_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Ação Positiva")
-      // .shortName("acao-positiva")
-      .build();
+  public void short_name_should_default_to_lower_case_hyphen() {
+    String name = "Way Test";
 
-  public static final Project WAY_TEST_PROJECT = start()
-      .group("br.com.objectos")
-      .name("Way Test")
-      .shortName("way-test")
-      .baseDir("test-output")
-      .build();
+    Project res = new FakeProjectBuilder()
+        .name(name)
+        .build();
 
-  private FakeProjects() {
+    assertThat(res.getShortName(), equalTo("way-test"));
   }
 
-  private static FakeProjectBuilder start() {
-    return new FakeProjectBuilder();
+  public void short_name_should_not_override() {
+    String name = "Way Test";
+    String shortName = "way";
+
+    Project res = new FakeProjectBuilder()
+        .name(name)
+        .shortName(shortName)
+        .build();
+
+    assertThat(res.getShortName(), equalTo(shortName));
   }
 
 }

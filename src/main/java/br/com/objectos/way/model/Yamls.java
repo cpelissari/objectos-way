@@ -42,11 +42,15 @@ public class Yamls {
 
   public static Yaml newYaml() {
     Representer representer = new Representer();
+    representer.addClassTag(Dirs.class, Tag.MAP);
     representer.addClassTag(Global.class, Tag.MAP);
     representer.addClassTag(Project.class, Tag.MAP);
     representer.addClassTag(User.class, Tag.MAP);
+    representer.addClassTag(Types.class, Tag.MAP);
 
-    representer.setPropertyUtils(new NaturalPropertyUtils());
+    NaturalPropertyUtils propertyUtils = new NaturalPropertyUtils();
+    // propertyUtils.setBeanAccess(BeanAccess.PROPERTY);
+    representer.setPropertyUtils(propertyUtils);
 
     DumperOptions options = new DumperOptions();
     options.setDefaultFlowStyle(FlowStyle.BLOCK);
@@ -62,8 +66,17 @@ public class Yamls {
         Class<? extends Object> type, BeanAccess bAccess)
         throws IntrospectionException {
 
-      Collection<Property> props = getPropertiesMap(type, bAccess).values();
-      return newLinkedHashSet(props);
+      Collection<Property> props = getPropertiesMap(type, BeanAccess.FIELD).values();
+
+      Set<Property> res = newLinkedHashSet();
+
+      for (Property property : props) {
+        if (property.isReadable() && property.isWritable()) {
+          res.add(property);
+        }
+      }
+
+      return res;
 
     }
 

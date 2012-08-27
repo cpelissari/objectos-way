@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 
-	<display-name>@{project.name}</display-name>
+	<display-name>@{name}</display-name>
 
 	<context-param>
 		<param-name>org.eclipse.jetty.servlet.Default.dirAllowed</param-name>
@@ -28,7 +28,7 @@
 	</filter-mapping>
 
 	<listener>
-		<listener-class>@{types.package}.ui.@{types.prefix}ListenerProd</listener-class>
+		<listener-class>@{types.packageName}.ui.@{types.prefix}ListenerProd</listener-class>
 	</listener>
 
 	<session-config>

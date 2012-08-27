@@ -15,6 +15,8 @@
  */
 package br.com.objectos.way.model;
 
+import com.google.common.base.Strings;
+
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
@@ -23,16 +25,20 @@ public class Project {
   public static interface Builder extends br.com.objectos.way.Builder<Project> {
 
     String getGroup();
-
     String getName();
-
     String getShortName();
+
+    String getBaseDir();
 
   }
 
   private String group;
   private String name;
   private String shortName;
+
+  private Comments comments;
+  private Dirs dirs;
+  private Types types;
 
   public Project() {
   }
@@ -41,6 +47,15 @@ public class Project {
     group = builder.getGroup();
     name = builder.getName();
     shortName = builder.getShortName();
+
+    fixShortNameIfNecessary();
+
+    comments = new Comments();
+
+    types = Types.valueOf(this);
+
+    String baseDir = builder.getBaseDir();
+    dirs = Dirs.valueOf(baseDir, types.getPackageName());
   }
 
   public String getGroup() {
@@ -55,6 +70,28 @@ public class Project {
     return shortName;
   }
 
+  public Comments getComments() {
+    return comments;
+  }
+
+  public Dirs getDirs() {
+    return dirs;
+  }
+
+  public Types getTypes() {
+    return types;
+  }
+
+  private void fixShortNameIfNecessary() {
+    if (Strings.isNullOrEmpty(shortName)) {
+      shortName = br.com.objectos.comuns.base.Strings
+          .whitespaceTo(name, "-")
+          .accentsToAscii()
+          .toString()
+          .toLowerCase();
+    }
+  }
+
   public void setGroup(String group) {
     this.group = group;
   }
@@ -65,6 +102,18 @@ public class Project {
 
   public void setShortName(String shortName) {
     this.shortName = shortName;
+  }
+
+  public void setComments(Comments comments) {
+    this.comments = comments;
+  }
+
+  public void setDirs(Dirs dirs) {
+    this.dirs = dirs;
+  }
+
+  public void setTypes(Types types) {
+    this.types = types;
   }
 
 }

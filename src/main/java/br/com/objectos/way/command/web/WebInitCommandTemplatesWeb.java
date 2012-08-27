@@ -17,44 +17,47 @@ package br.com.objectos.way.command.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
-
-import br.com.objectos.way.model.Dirs;
+import br.com.objectos.way.io.Templates;
 import br.com.objectos.way.model.Project;
-import br.com.objectos.way.model.Yamls;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
+import com.google.common.io.Resources;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-class WebInitCommandYaml {
-
-  private static final Logger logger = LoggerFactory.getLogger(WebInitCommandYaml.class);
+class WebInitCommandTemplatesWeb {
 
   public void execute(Project project) {
     try {
       tryToExecute(project);
+
+    } catch (URISyntaxException e) {
+      throw new WebCommandException(e);
+
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new WebCommandException(e);
+
     }
   }
 
-  private void tryToExecute(Project project) throws IOException {
-    Yaml yaml = Yamls.newYaml();
-    String dump = yaml.dump(project);
+  private void tryToExecute(Project project) throws URISyntaxException, IOException {
+    Templates
+        .foundAtBaseDir(templateBaseDir("/templates/common"))
+        .forProject(project)
+        .parseAll();
 
-    logger.debug(dump);
+    Templates
+        .foundAtBaseDir(templateBaseDir("/templates/web"))
+        .forProject(project)
+        .parseAll();
+  }
 
-    Dirs dirs = project.getDirs();
-
-    File baseDir = dirs.getBaseDirFile();
-    File file = new File(baseDir, "way.yaml");
-    Files.write(dump, file, Charsets.UTF_8);
+  private File templateBaseDir(String resource) throws URISyntaxException {
+    URL url = Resources.getResource(getClass(), resource);
+    return new File(url.toURI());
   }
 
 }

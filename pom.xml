@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.objectos</groupId>
+		<artifactId>objectos-comuns-parent</artifactId>
+		<version>2.0.17</version>
+	</parent>
+	<artifactId>objectos-way</artifactId>
+	<version>0.01-SNAPSHOT</version>
+	<name>objectos way</name>
+	<properties>
+		<org.jcommander.version>1.27</org.jcommander.version>
+		<org.yaml.version>1.10</org.yaml.version>
+		<sun.codemodel>2.6</sun.codemodel>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-multibindings</artifactId>
+			<version>${google.guice.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+			<version>${org.jcommander.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>${org.yaml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.codemodel</groupId>
+			<artifactId>codemodel</artifactId>
+			<version>${sun.codemodel}</version>
+		</dependency>
+	</dependencies>
+</project>

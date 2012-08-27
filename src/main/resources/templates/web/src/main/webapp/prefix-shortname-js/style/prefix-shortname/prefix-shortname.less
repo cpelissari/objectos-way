@@ -1,0 +1,52 @@
+@import "../bootstrap/less/bootstrap.less";
+@import "../objectos-css/less/objectos-css.less";
+
+@import "datepicker_minimal.less";
+@import "meio.autocomplete.less";
+
+@import "factoring-vars.less";
+@import "factoring-type.less";
+
+@import "factoring-brand.less";
+@import "factoring-breadcrumbs.less";
+@import "factoring-data-list.less";
+@import "factoring-form.less";
+@import "factoring-page.less";
+@import "factoring-panel.less";
+@import "factoring-sidebar.less";
+@import "factoring-table.less";
+@import "factoring-vcard.less";
+
+@import "factoring-bd.less";
+@import "factoring-pdf.less";
+
+body.fac {
+	background: url('../../img/noise-bg.png');
+
+	#bd {
+		padding-top: 15px;
+		
+		.bd-inner {
+			.border-radius(5px);
+		
+			background: @white;
+			border: 1px solid @grayLighter;
+			margin: 0 auto;
+			padding: 15px 0;
+			width: 974px;
+		}		
+	}
+	
+	.label-contrato.COTACAO {
+		.label;
+		background-color: @infoText;
+	}
+	.label-contrato.ABERTO {
+		.label;
+		background-color: @orange;
+	}
+	.label-contrato.FECHADO {
+		.label;
+		background-color: @grayDark;
+	}
+}

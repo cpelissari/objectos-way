@@ -1,0 +1,54 @@
+/*
+---
+
+description: A plugin for enabling autocomplete of a text input or textarea.
+
+authors:
+ - Fábio Miranda Costa
+
+license: MIT-style license
+
+...
+*/
+
+.ma-container {
+	position: absolute;
+	visibility: hidden;
+	// overflow-y: auto;
+	// overflow-x: hidden;
+
+	ul {
+		.dropdown-menu;
+		.typeahead;
+		
+		display: block;
+		position: static;
+		width: 100%;
+		
+		li {
+		    display: block;
+		    padding: 3px 15px;
+		    clear: both;
+		    font-weight: normal;
+		    line-height: @baseLineHeight;
+		    white-space: nowrap;		
+		}
+	}
+}
+
+.ma-container .ma-hover {
+	background-color: @warningBackground !important;
+}
+
+.ma-container .ma-odd {
+}
+
+.ma-container .ma-even {
+}
+
+.ma-loading {
+	background-color: #fafba4;
+}
+
+.ma-selected {
+}

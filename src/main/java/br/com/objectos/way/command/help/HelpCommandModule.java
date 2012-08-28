@@ -17,9 +17,9 @@ package br.com.objectos.way.command.help;
 
 import java.lang.annotation.Annotation;
 
-import br.com.objectos.way.command.AbstractCommandModule;
-import br.com.objectos.way.command.Command;
-import br.com.objectos.way.command.CommandKey;
+import br.com.objectos.comuns.cli.AbstractCommandModule;
+import br.com.objectos.comuns.cli.Command;
+import br.com.objectos.comuns.cli.CommandKey;
 
 import com.google.inject.multibindings.MapBinder;
 

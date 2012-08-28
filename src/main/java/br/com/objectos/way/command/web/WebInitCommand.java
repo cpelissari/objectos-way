@@ -15,7 +15,7 @@
  */
 package br.com.objectos.way.command.web;
 
-import br.com.objectos.way.command.AbstractCommand;
+import br.com.objectos.comuns.cli.AbstractCommand;
 import br.com.objectos.way.model.Project;
 
 import com.google.inject.Inject;

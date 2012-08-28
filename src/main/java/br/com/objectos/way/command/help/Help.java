@@ -21,7 +21,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import br.com.objectos.way.command.CommandKey;
+import br.com.objectos.comuns.cli.CommandKey;
 
 import com.google.inject.BindingAnnotation;
 

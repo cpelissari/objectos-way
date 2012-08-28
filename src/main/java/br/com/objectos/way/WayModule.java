@@ -15,9 +15,7 @@
  */
 package br.com.objectos.way;
 
-import br.com.objectos.way.command.MainCommandModule;
-import br.com.objectos.way.command.help.HelpCommandModule;
-import br.com.objectos.way.command.web.WebCommandModule;
+import br.com.objectos.way.command.WayCliModule;
 
 import com.google.inject.AbstractModule;
 
@@ -28,10 +26,7 @@ class WayModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    install(new MainCommandModule());
-
-    install(new HelpCommandModule());
-    install(new WebCommandModule());
+    install(new WayCliModule());
   }
 
 }

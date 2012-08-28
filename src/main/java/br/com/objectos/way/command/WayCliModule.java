@@ -15,37 +15,33 @@
  */
 package br.com.objectos.way.command;
 
-import java.util.Map;
+import br.com.objectos.comuns.cli.AbstractCliModule;
+import br.com.objectos.comuns.cli.MainCommand;
+import br.com.objectos.way.command.help.HelpCommandModule;
+import br.com.objectos.way.command.web.WebCommandModule;
 
-import com.google.inject.Inject;
+import com.google.inject.multibindings.MapBinder;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-class ExecutorGuice implements Executor {
+public class WayCliModule extends AbstractCliModule {
 
-  private final Map<String, MainCommand> commandMap;
-
-  @Inject
-  public ExecutorGuice(Map<String, MainCommand> commandMap) {
-    this.commandMap = commandMap;
+  @Override
+  protected String getDefaultMainCommand() {
+    return HelpCommand.NAME;
   }
 
   @Override
-  public void execute(String... _args) {
-    Args args = new Args(_args);
+  protected void bindMainCommands(MapBinder<String, MainCommand> commands) {
+    commands.addBinding(HelpCommand.NAME).to(HelpCommand.class);
+    commands.addBinding(WebCommand.NAME).to(WebCommand.class);
+  }
 
-    String commandKey = HelpCommand.NAME;
-
-    for (String key : commandMap.keySet()) {
-      if (args.contains(key)) {
-        commandKey = key;
-        break;
-      }
-    }
-
-    MainCommand command = commandMap.get(commandKey);
-    command.execute(args.remove(commandKey));
+  @Override
+  protected void installCommands() {
+    install(new HelpCommandModule());
+    install(new WebCommandModule());
   }
 
 }

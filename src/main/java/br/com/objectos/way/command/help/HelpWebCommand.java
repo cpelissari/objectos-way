@@ -15,8 +15,8 @@
  */
 package br.com.objectos.way.command.help;
 
-import br.com.objectos.way.command.Args;
-import br.com.objectos.way.command.Command;
+import br.com.objectos.comuns.cli.Args;
+import br.com.objectos.comuns.cli.Command;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)

@@ -19,7 +19,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.List;
 
-import br.com.objectos.way.command.Options;
+import br.com.objectos.comuns.cli.Options;
 import br.com.objectos.way.model.Project;
 
 import com.beust.jcommander.Parameter;

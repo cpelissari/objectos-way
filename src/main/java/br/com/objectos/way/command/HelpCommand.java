@@ -17,6 +17,7 @@ package br.com.objectos.way.command;
 
 import java.lang.annotation.Annotation;
 
+import br.com.objectos.comuns.cli.AbstractMainCommand;
 import br.com.objectos.way.command.help.Help;
 
 import com.google.inject.Inject;

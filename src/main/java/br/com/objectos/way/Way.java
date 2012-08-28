@@ -6,7 +6,7 @@
  */
 package br.com.objectos.way;
 
-import br.com.objectos.way.command.Executor;
+import br.com.objectos.comuns.cli.Executor;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;

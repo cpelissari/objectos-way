@@ -15,41 +15,25 @@
  */
 package br.com.objectos.way.model;
 
+import br.com.objectos.comuns.etc.AbstractEtcModule;
+import br.com.objectos.comuns.etc.model.Global;
+import br.com.objectos.comuns.etc.model.User;
+
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class User {
+public class WayModelModule extends AbstractEtcModule {
 
-  public static interface Builder extends br.com.objectos.way.Builder<User> {
-    String getName();
-    String getEmail();
-  }
+  @Override
+  protected void configureEtc() {
+    bindConfigClass(Global.class);
+    bindConfigClass(br.com.objectos.comuns.etc.model.Dirs.class);
+    bindConfigClass(User.class);
 
-  private String name;
-  private String email;
-
-  public User() {
-  }
-
-  User(Builder builder) {
-    name = builder.getName();
-    email = builder.getEmail();
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
+    bindConfigClass(Project.class);
+    bindConfigClass(Comments.class);
+    bindConfigClass(Dirs.class);
+    bindConfigClass(Types.class);
   }
 
 }

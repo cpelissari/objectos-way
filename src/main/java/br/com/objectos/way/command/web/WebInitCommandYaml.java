@@ -20,14 +20,15 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
 
+import br.com.objectos.comuns.etc.Config;
 import br.com.objectos.way.model.Dirs;
 import br.com.objectos.way.model.Project;
-import br.com.objectos.way.model.Yamls;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
@@ -35,6 +36,13 @@ import com.google.common.io.Files;
 class WebInitCommandYaml {
 
   private static final Logger logger = LoggerFactory.getLogger(WebInitCommandYaml.class);
+
+  private final Provider<Config> configProvider;
+
+  @Inject
+  public WebInitCommandYaml(Provider<Config> configProvider) {
+    this.configProvider = configProvider;
+  }
 
   public void execute(Project project) {
     try {
@@ -45,8 +53,8 @@ class WebInitCommandYaml {
   }
 
   private void tryToExecute(Project project) throws IOException {
-    Yaml yaml = Yamls.newYaml();
-    String dump = yaml.dump(project);
+    Config config = configProvider.get();
+    String dump = config.toString(project);
 
     logger.debug(dump);
 

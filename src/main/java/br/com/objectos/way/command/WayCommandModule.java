@@ -25,7 +25,7 @@ import com.google.inject.multibindings.MapBinder;
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class WayCliModule extends AbstractCliModule {
+public class WayCommandModule extends AbstractCliModule {
 
   @Override
   protected String getDefaultMainCommand() {

@@ -15,8 +15,8 @@
  */
 package br.com.objectos.way.command.web;
 
-import static br.com.objectos.way.Fakes.cleanFile;
-import static br.com.objectos.way.Fakes.readLines;
+import static br.com.objectos.comuns.etc.EtcFiles.cleanFile;
+import static br.com.objectos.comuns.etc.EtcFiles.readLines;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

@@ -27,7 +27,7 @@ import java.net.URL;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import br.com.objectos.way.Fakes;
+import br.com.objectos.comuns.etc.EtcFiles;
 import br.com.objectos.way.model.Dirs;
 import br.com.objectos.way.model.FakeProjects;
 import br.com.objectos.way.model.Project;
@@ -64,14 +64,14 @@ public class TemplatesTest {
     assertThat(res, equalTo(simple));
     assertThat(simple.exists(), is(true));
 
-    String lines = Fakes.readLines(res);
+    String lines = EtcFiles.readLines(res);
     assertThat(lines, equalTo("br.com.objectos\nWay Test\nway-test"));
   }
 
   private File newExpectedFile(String filename) {
     Dirs dirs = project.getDirs();
     File baseDir = dirs.getBaseDirFile();
-    return Fakes.cleanFile(baseDir, filename);
+    return EtcFiles.cleanFile(baseDir, filename);
   }
 
   private File fakeTemplateBaseDir() {

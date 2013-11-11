@@ -21,12 +21,12 @@
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>way-base</artifactId>
-			<version>${objectos.way.base.version}</version>
+			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com.objectos</groupId>
 			<artifactId>objectos-comuns-cli</artifactId>
-			<version>${objectos.comuns.cli.version}</version>
+			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.yaml</groupId>

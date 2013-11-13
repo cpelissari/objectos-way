@@ -1,4 +1,7 @@
 package br.com.objectos.way.codegen;
 
-class ClassJavaWriterJdbc implements Command {
+import br.com.objectos.comuns.cli.Command;
+
+class ClassJavaWriterJdbc
+    implements Command {
 }

@@ -130,7 +130,7 @@ public class TesteDeCriarJavaWriter {
 
   private void assertGen(String res, String path) {
     String prova = extraiConteudo(path);
-    if (!res.equals(path)) {
+    if (!res.equals(prova)) {
       System.out.println(res);
       System.out.println("======================");
       System.out.println(prova);

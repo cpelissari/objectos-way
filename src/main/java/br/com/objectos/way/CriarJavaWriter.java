@@ -130,16 +130,16 @@ class CriarJavaWriter {
       javaWriter.beginType("br.com.objectos.way.codegen.ClassJavaWriterJdbc", "class",
           criaModificadorDefault());
       javaWriter.emitEmptyLine();
-      javaWriter.emitField("java.lang.Integer", "id", EnumSet.of(Modifier.PRIVATE));
+      javaWriter.emitField("java.lang.Integer", "id", criaModificadorPrivate());
       javaWriter.emitEmptyLine();
-      javaWriter.emitField("int", "quantidade", EnumSet.of(Modifier.PRIVATE, Modifier.FINAL));
+      javaWriter.emitField("int", "quantidade", criaModificadorPrivateFinal());
       javaWriter.emitEmptyLine();
       javaWriter
-          .emitField("java.lang.String", "nome", EnumSet.of(Modifier.PRIVATE, Modifier.FINAL));
+          .emitField("java.lang.String", "nome", criaModificadorPrivateFinal());
       javaWriter.emitEmptyLine();
       String type = javaWriter.compressType("br.com.objectos.comuns.base.br.Cep");
       javaWriter.emitField(type, "prefixo",
-          EnumSet.of(Modifier.PRIVATE, Modifier.FINAL));
+          criaModificadorPrivateFinal());
       javaWriter.emitEmptyLine();
       javaWriter.endType();
       return writer.toString();
@@ -228,8 +228,6 @@ class CriarJavaWriter {
     }
   }
   public String criarGetters() {
-    StringWriter writer = new StringWriter();
-    JavaWriter javaWriter = new JavaWriter(writer);
     try {
       javaWriter.emitPackage("br.com.objectos.way.codegen");
       javaWriter.beginType("br.com.objectos.way.codegen.ClassJavaWriterJdbc", "class",
@@ -265,9 +263,6 @@ class CriarJavaWriter {
   }
 
   public String criaComentarioInicio() {
-    StringWriter writer = new StringWriter();
-    JavaWriter javaWriter = new JavaWriter(writer);
-
     String coment = "Copyright 2013 Objectos, Fábrica de Software LTDA.\n\n" +
         "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not\n" +
         "use this file except in compliance with the License. You may obtain a copy of\n" +
@@ -304,18 +299,13 @@ class CriarJavaWriter {
     return modificador;
   }
 
-  private EnumSet<Modifier> criaModificadorProtected() {
-    EnumSet<Modifier> modificador = EnumSet.of(Modifier.PROTECTED);
+  private EnumSet<Modifier> criaModificadorPrivateFinal() {
+    EnumSet<Modifier> modificador = EnumSet.of(Modifier.PRIVATE, Modifier.FINAL);
     return modificador;
   }
 
   private EnumSet<Modifier> criaModificadorDefault() {
     EnumSet<Modifier> modificador = EnumSet.noneOf(Modifier.class);
-    return modificador;
-  }
-
-  private EnumSet<Modifier> criaModificadorFinal() {
-    EnumSet<Modifier> modificador = EnumSet.of(Modifier.FINAL);
     return modificador;
   }
 

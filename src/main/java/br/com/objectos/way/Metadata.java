@@ -15,13 +15,12 @@
  */
 package br.com.objectos.way;
 
-import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.List;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
+import br.com.objectos.way.codegen.MethodMetadata;
+import br.com.objectos.way.model.ClassJavaWriter;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
@@ -47,27 +46,24 @@ public class Metadata {
     }
   }
 
-  public List<String> extractInnerClasses(Class<?> clazz) {
-    return null;
-  }
-
-  public List<String> extractMethods(Class<?> clazz) {
-    Method[] m = clazz.getMethods();
+  public List<Class<?>> extractInnerClasses(Class<?> clazz) {
+    Constructor<?>[] constructors = clazz.getConstructors();
 
     return null;
   }
 
-  public List<String> extractGetters(Class<?> clazz) {
-    return null;
-  }
-
-  private String extraiConteudo(String nameClass) {
+  public List<MethodMetadata> extractMethods(Class<?> clazz) {
     try {
-      URL url = Resources.getResource(getClass(), nameClass);
-      return Resources.toString(url, Charsets.UTF_8);
-    } catch (IOException e) {
-      return "";
+      Method[] methods = clazz.getDeclaredMethods();
+      List<MethodMetadata> list = null;
+      return list;
+    } catch (Exception e) {
+      return null;
     }
+  }
+
+  public List<String> extractGetters(Class<ClassJavaWriter> class1) {
+    return null;
   }
 
 }

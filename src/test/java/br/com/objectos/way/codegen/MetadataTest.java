@@ -18,8 +18,6 @@ package br.com.objectos.way.codegen;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import org.testng.annotations.BeforeMethod;
@@ -27,9 +25,6 @@ import org.testng.annotations.Test;
 
 import br.com.objectos.way.Metadata;
 import br.com.objectos.way.model.ClassJavaWriter;
-
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
@@ -57,47 +52,34 @@ public class MetadataTest {
   }
 
   public void extract_inner_classes() {
-    String path = "/codegen/InnerClass.java";
+    List<Class<?>> res = meta.extractInnerClasses(ClassJavaWriter.class);
 
-    List<String> res = meta.extractInnerClasses(ClassJavaWriter.class);
-
-    assertGen(res, path);
+    String className = res.get(0).getName();
+    assertThat(className, equalTo("Construtor"));
   }
 
   public void extract_methods() {
-    String path = "/codegen/Methods.java";
+    List<MethodMetadata> res = meta.extractMethods(ClassJavaWriter.class);
 
-    List<String> res = meta.extractMethods(ClassJavaWriter.class);
+    assertThat(res.size(), equalTo(4));
 
-    assertGen(res, path);
+    assertThat(res.get(0).getReturnType(), equalTo("class java.lang.Integer"));
+    assertThat(res.get(0).getName(), equalTo("getId"));
+
+    assertThat(res.get(1).getReturnType(), equalTo("int"));
+    assertThat(res.get(1).getName(), equalTo("getQuantidade"));
+
+    assertThat(res.get(2).getReturnType(), equalTo("java.lang.String"));
+    assertThat(res.get(2).getName(), equalTo("getNome"));
+
+    assertThat(res.get(3).getReturnType(), equalTo("int"));
+    assertThat(res.get(3).getName(), equalTo("getPrefixo"));
   }
 
   public void extract_getters() {
-    String path = "/codegen/Getters.java";
-
     List<String> res = meta.extractGetters(ClassJavaWriter.class);
 
-    assertGen(res, path);
-  }
-
-  private void assertGen(List<String> res, String path) {
-    String prova = extraiConteudo(path);
-    if (!res.equals(prova)) {
-      System.out.println(res);
-      System.out.println("======================");
-      System.out.println(prova);
-      System.out.println("_____________________________________________________________");
-    }
-    assertThat(res.get(0), equalTo(prova));
-  }
-
-  private String extraiConteudo(String path) {
-    try {
-      URL url = Resources.getResource(getClass(), path);
-      return Resources.toString(url, Charsets.UTF_8);
-    } catch (IOException e) {
-      return "";
-    }
+    assertThat(res.get(0), equalTo("Construtor"));
   }
 
 }

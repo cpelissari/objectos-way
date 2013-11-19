@@ -15,19 +15,33 @@
  */
 package br.com.objectos.way;
 
-import java.lang.reflect.Constructor;
+import static com.google.common.collect.Lists.transform;
+
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.com.objectos.way.codegen.MethodMetadata;
-import br.com.objectos.way.model.ClassJavaWriter;
+
+import com.google.common.base.Function;
 
 /**
- * @author marcio.endo@objectos.com.br (Marcio Endo)
+ * @author cristiane.pelissari@objectos.com.br (Cristiane Iope Pelissari)
  */
 public class Metadata {
 
-  public String extractPackageName(Class<?> className) {
+  private final Class<?> clazz;
+
+  public static Metadata of(Class<?> clazz) {
+    return new Metadata(clazz);
+  }
+
+  private Metadata(Class<?> clazz) {
+    this.clazz = clazz;
+  }
+
+  private String extractPackageName(Class<?> className) {
     try {
       Package package_ = className.getPackage();
       String name = package_.getName();
@@ -37,7 +51,7 @@ public class Metadata {
     }
   }
 
-  public String extractInterfaceName(Class<?> clazz) {
+  private String extractClassName(Class<?> clazz) {
     try {
       String name = clazz.getName();
       return name;
@@ -46,24 +60,63 @@ public class Metadata {
     }
   }
 
-  public List<Class<?>> extractInnerClasses(Class<?> clazz) {
-    Constructor<?>[] constructors = clazz.getConstructors();
+  private List<Class<?>> extractInnerClasses(Class<?> clazz) {
+    Class<?>[] innerClasses = clazz.getDeclaredClasses();
 
-    return null;
+    List<Class<?>> list = Arrays.asList(innerClasses);
+    return list;
   }
 
-  public List<MethodMetadata> extractMethods(Class<?> clazz) {
-    try {
-      Method[] methods = clazz.getDeclaredMethods();
-      List<MethodMetadata> list = null;
-      return list;
-    } catch (Exception e) {
-      return null;
+  private List<MethodMetadata> extractMethods(Class<?> clazz) {
+    Method[] methods = clazz.getDeclaredMethods();
+    List<Method> listMethods = Arrays.asList(methods);
+
+    List<MethodMetadata> listMetadata = transform(listMethods, new ToMethodMetadata());
+
+    return listMetadata;
+  }
+
+  private List<MethodMetadata> extractGetters(Class<?> clazz2) {
+    Method[] methods = clazz2.getDeclaredMethods();
+    List<Method> listMethods = Arrays.asList(methods);
+
+    List<MethodMetadata> listMetadata = transform(listMethods, new ToMethodMetadata());
+    List<MethodMetadata> aux = new ArrayList<MethodMetadata>();
+
+    for (int i = 0; i < methods.length; i++) {
+      MethodMetadata item = listMetadata.get(i);
+      if (item.isGetter()) {
+        aux.add(item);
+      }
+    }
+    return aux;
+  }
+
+  private static final class ToMethodMetadata implements Function<Method, MethodMetadata> {
+    @Override
+    public MethodMetadata apply(Method input) {
+      return new MethodMetadata(input);
     }
   }
 
-  public List<String> extractGetters(Class<ClassJavaWriter> class1) {
-    return null;
+  public String getPackageName() {
+    return extractPackageName(clazz);
+  }
+
+  public String getClassName() {
+    return extractClassName(clazz);
+  }
+
+  public List<Class<?>> getInnerClasses() {
+    return extractInnerClasses(clazz);
+  }
+
+  public List<MethodMetadata> getMethods() {
+    return extractMethods(clazz);
+  }
+
+  public List<MethodMetadata> getGetters() {
+    return extractGetters(clazz);
   }
 
 }

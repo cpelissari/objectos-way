@@ -28,15 +28,17 @@ public class MethodMetadata {
     this.method = method;
   }
 
-  public String getReturnType() {
-    Class<?> methodType = method.getReturnType();
-    String type = methodType.toString();
-    return type;
+  public Class<?> getType() {
+    return method.getReturnType();
   }
 
   public String getName() {
-    String name = method.getName();
-    return name;
+    return method.getName();
+  }
+
+  public boolean isGetter() {
+    String name = this.getName();
+    return name.startsWith("get");
   }
 
 }

@@ -1,3 +1,4 @@
+
 /**
  * Copyright 2013 Objectos, Fábrica de Software LTDA.
  *
@@ -13,34 +14,3 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package br.com.objectos.way.model;
-
-import br.com.objectos.comuns.base.br.Cep;
-
-/**
- * @author cristiane.pelissari@objectos.com.br (Cristiane Iope Pelissari)
- */
-
-public interface ClassJavaWriter {
-
-  interface Construtor {
-
-    int getQuantidade();
-
-    String getNome();
-
-    Cep getPrefixo();
-
-  }
-
-  Integer getId();
-
-  int getQuantidade();
-
-  String getNome();
-
-  Cep getPrefixo();
-
-  void serializer();
-
-}

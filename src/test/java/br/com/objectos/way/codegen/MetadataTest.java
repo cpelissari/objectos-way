@@ -23,11 +23,12 @@ import java.util.List;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import br.com.objectos.comuns.base.br.Cep;
 import br.com.objectos.way.Metadata;
 import br.com.objectos.way.model.ClassJavaWriter;
 
 /**
- * @author marcio.endo@objectos.com.br (Marcio Endo)
+ * @author cristiane.pelissari@objectos.com.br (Cristiane Iope Pelissari)
  */
 @Test
 public class MetadataTest {
@@ -36,50 +37,65 @@ public class MetadataTest {
 
   @BeforeMethod
   public void setup() {
-    meta = new Metadata();
+    meta = Metadata.of(ClassJavaWriter.class);
   }
 
   public void package_name() {
-    String res = meta.extractPackageName(ClassJavaWriter.class);
+    String res = meta.getPackageName();
 
     assertThat(res, equalTo("br.com.objectos.way.model"));
   }
 
   public void interface_name() {
-    String res = meta.extractInterfaceName(ClassJavaWriter.class);
+    String res = meta.getClassName();
 
     assertThat(res, equalTo("br.com.objectos.way.model.ClassJavaWriter"));
   }
 
   public void extract_inner_classes() {
-    List<Class<?>> res = meta.extractInnerClasses(ClassJavaWriter.class);
+    List<Class<?>> res = meta.getInnerClasses();
 
-    String className = res.get(0).getName();
-    assertThat(className, equalTo("Construtor"));
+    assertThat(res.size(), equalTo(1));
+    assertThat(res.get(0), equalTo((Object) ClassJavaWriter.Construtor.class));
   }
 
   public void extract_methods() {
-    List<MethodMetadata> res = meta.extractMethods(ClassJavaWriter.class);
+    List<MethodMetadata> res = meta.getMethods();
 
-    assertThat(res.size(), equalTo(4));
+    assertThat(res.size(), equalTo(5));
 
-    assertThat(res.get(0).getReturnType(), equalTo("class java.lang.Integer"));
+    assertThat(res.get(0).getType(), equalTo((Object) Integer.class));
     assertThat(res.get(0).getName(), equalTo("getId"));
 
-    assertThat(res.get(1).getReturnType(), equalTo("int"));
+    assertThat(res.get(1).getType(), equalTo((Object) int.class));
     assertThat(res.get(1).getName(), equalTo("getQuantidade"));
 
-    assertThat(res.get(2).getReturnType(), equalTo("java.lang.String"));
+    assertThat(res.get(2).getType(), equalTo((Object) String.class));
     assertThat(res.get(2).getName(), equalTo("getNome"));
 
-    assertThat(res.get(3).getReturnType(), equalTo("int"));
+    assertThat(res.get(3).getType(), equalTo((Object) Cep.class));
     assertThat(res.get(3).getName(), equalTo("getPrefixo"));
+
+    assertThat(res.get(4).getType(), equalTo((Object) void.class));
+    assertThat(res.get(4).getName(), equalTo("serializer"));
   }
 
   public void extract_getters() {
-    List<String> res = meta.extractGetters(ClassJavaWriter.class);
+    List<MethodMetadata> res = meta.getGetters();
 
-    assertThat(res.get(0), equalTo("Construtor"));
+    assertThat(res.size(), equalTo(4));
+
+    assertThat(res.get(0).getType(), equalTo((Object) Integer.class));
+    assertThat(res.get(0).getName(), equalTo("getId"));
+
+    assertThat(res.get(1).getType(), equalTo((Object) int.class));
+    assertThat(res.get(1).getName(), equalTo("getQuantidade"));
+
+    assertThat(res.get(2).getType(), equalTo((Object) String.class));
+    assertThat(res.get(2).getName(), equalTo("getNome"));
+
+    assertThat(res.get(3).getType(), equalTo((Object) Cep.class));
+    assertThat(res.get(3).getName(), equalTo("getPrefixo"));
   }
 
 }
